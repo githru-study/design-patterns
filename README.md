@@ -38,3 +38,13 @@
   - 1주 1명당 2패턴씩 (4 +4 +4 +4 +4 +2)
 
 
+
+---
+## 파일명 규칙
+
+- 카테고리 폴더 : creational / structural / behavioral
+- 파일명 : `{패턴 영문명}.md`
+  - 영어 소문자 사용
+  - ex) `creational/factory-method.md`
+    
+
