@@ -135,8 +135,13 @@ const RedBorderButton = ({ handleClick, children }: ButtonProps) => {
 ### 사용사례
 
 1. mui에서의 button variant
+
    variant에 따라 다른 ui의 버튼을 반환함.
+
    https://mui.com/material-ui/react-button/
+
 2. react-router의 createBrowserRouter,createHashRouter
+
    createRouter를 기초클래스로 하는 BrowserRouter,HashRouter를 정의하고 호출하는 부분에서 Router 객체의 생성부분을 추상화함
+
    https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L213
