@@ -43,8 +43,21 @@
 ## 파일명 규칙
 
 - 카테고리 폴더 : creational / structural / behavioral
+- 폴더명 : `{패턴 영문명}/`
 - 파일명 : `{패턴 영문명}.md`
   - 영어 소문자 사용
-  - ex) `creational/factory-method.md`
+- 예시)
+  ```
+  behavioral/
+  creational/
+    factory-method/
+      factory-method.md
+      image1.png
+      image2.png
+    abstract-factory/
+    builder/
+    ...
+  structural/
+  ```
     
 
