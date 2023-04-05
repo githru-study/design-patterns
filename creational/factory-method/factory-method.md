@@ -121,6 +121,14 @@ const RedBorderButton = ({ handleClick, children }: ButtonProps) => {
 
 팩토리 메서드 패턴의 사용 사례는 다음과 같다.
 
+## JSX
+
+react에서 사용하는 JSX도 팩토리 메서드 패턴의 일종이다.
+
+JSX는 React.createElement() 메서드를 사용하여 React 요소를 생성하게 된다.
+React.createElement()는 요소의 타입, 속성, 자식 요소를 받아 React 요소를 반환한다.
+즉 JSX 인터페이스를 정의하고, 이를 어떻게 구현할지는 타입, 속성, 자식만 받아 객체 생성 로직은 React.createElement()내부에 추상화한다.
+
 ## mui
 
 MUI의 [Button](https://mui.com/material-ui/react-button/#basic-button) 에서도 팩토리 메서드 패턴을 찾아볼 수 있다.
