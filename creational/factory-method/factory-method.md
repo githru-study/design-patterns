@@ -119,11 +119,21 @@ const RedBorderButton = ({ handleClick, children }: ButtonProps) => {
 
 # 사용사례
 
+팩토리 메서드 패턴의 사용 사례는 다음과 같다.
+
 ## mui
 
-MUI 에서도 팩토리 메서드 패턴을 찾아볼 수 있다.
+MUI의 [Button](https://mui.com/material-ui/react-button/#basic-button) 에서도 팩토리 메서드 패턴을 찾아볼 수 있다.
+
+같은 인터페이스를 공유하는 Button이라는 기초 클래스를 만들어놓고, 어떻게 JSX 객체를 생성할지 variant로 추상화한다.
 
 variant에 따라 다른 ui의 버튼을 반환한다.
+
+```jsx
+<Button variant="text">Text</Button>
+<Button variant="contained">Contained</Button>
+<Button variant="outlined">Outlined</Button>
+```
 
 https://mui.com/material-ui/react-button/
 
