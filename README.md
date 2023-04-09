@@ -67,6 +67,7 @@
 
 ### behavioral
   - [command](./behavioral/command/command.md)
+  - [iterator](./behavioral/iterator/iterator.md)
 
 ### creational
   - [factory-method](./creational/factory-method/factory-method.md)
