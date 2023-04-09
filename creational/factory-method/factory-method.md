@@ -10,70 +10,9 @@
 
 클래스의 인스턴스를 생성하는 코드와 생성된 클래스의 인스턴스를 사용하는 코드와 결합되어 있다면 확장이 어렵다.
 
-만약 어플리케이션에서 border: 1px solid red를 가지는 버튼을 생성한다고 정하고 어플리케이션의 모든 버튼에 대해 다음과 같이 작성하였다고 생각해보자.
+이는 클라이언트와 객체 생성코드의 결합을 분리시켜 클라이언트에서 객체 생성 로직을 캡슐화 하여 해결할 수 있다.
 
-```tsx
-const Component = () => {
-  // ...logic
-  return (
-    // ...JSX
-    <button
-      style={{ border: "1px solid red" }}
-      onClick={() => console.log("click")}
-    >
-      {children}
-    </button>
-  );
-};
-```
-
-만약 UI가 변경되거나 어플리케이션에 다양한 디자인의 버튼이 추가된다면 일일히 해당하는 부분을 찾아서 고쳐야 한다.
-
-## 해결책
-
-버튼이라는 큰 카테고리 아래서, 어떤 type에 따라 다른 ui의 버튼을 생성하도록 추상화할 수 있다.
-
-이렇게 어떤 버튼을 생성할지 Button 컴포넌트에게 위임하고 해당 로직을 추상화하면 다른 ui의 버튼을 추가할 때는 ButtonProps의 type을 추가하고 해당 유형에 맞는 버튼을 추가해주면 된다.
-
-변경이 있을 시에도 단순하게 Button의 type prop만 변경해주면 된다.
-
-```tsx
-type ButtonProps = {
-  type: "redBorder" | "blueBorder" | "redDotted" | "blueDotted";
-  handleClick: () => void;
-  children: ReactNode;
-};
-
-const Button = ({ type = "redBorder", handleClick, children }: ButtonProps) => {
-  switch (type) {
-    case "redBorder":
-      return (
-        <button style={{ border: "1px solid red" }} onClick={handleClick}>
-          {children}
-        </button>
-      );
-    case "blueBorder":
-      return (
-        <button style={{ border: "1px solid blue" }} onClick={handleClick}>
-          {children}
-        </button>
-      );
-    case "redDotted":
-      return (
-        <button style={{ border: "1px dotted red" }} onClick={handleClick}>
-          {children}
-        </button>
-      );
-    case "blueDotted":
-      return (
-        <button style={{ border: "1px dotted blue" }} onClick={handleClick}>
-          {children}
-        </button>
-      );
-  }
-};
-export { Button };
-```
+캡슐화 함으로서 새로운 객체 유형이 추가되더라도 확장이 쉬워지며, 객체 생성 코드가 분리되었기 떄문에 객체 생성 로직이 변경되면 객체 생성 코드만 수정하여 유연하게 관리할 수 있으며, 객체를 생성하는 중복 코드도 줄일 수 있다.
 
 ## 헷갈렸던 점
 
@@ -133,7 +72,7 @@ React.createElement()는 요소의 타입, 속성, 자식 요소를 받아 React
 
 MUI의 [Button](https://mui.com/material-ui/react-button/#basic-button) 에서도 팩토리 메서드 패턴을 찾아볼 수 있다.
 
-같은 인터페이스를 공유하는 Button이라는 기초 클래스를 만들어놓고, 어떻게 JSX 객체를 생성할지 variant로 추상화한다.
+같은 인터페이스를 공유하는 Button이라는 기초 인터페이스를 만들어놓고, 어떻게 JSX 객체를 생성할지 variant로 추상화한다.
 
 variant에 따라 다른 ui의 버튼을 반환한다.
 
@@ -149,10 +88,10 @@ https://mui.com/material-ui/react-button/
 
 SPA를 구현하기 위한 라이브러리인 react에서 자주 사용하는 react-router에서도 팩토리메서드 패턴을 찾아볼 수 있다.
 
-[createRouter](https://github.com/remix-run/react-router/blob/main/packages/router/router.ts#L671)라는 기초클래스와
-이 기초 클래스에서 확장한 확장클래스인 [createBrowserRouter](https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L213)와 [createHashRouter](https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L227)가 그 예시이다.
+[createRouter](https://github.com/remix-run/react-router/blob/main/packages/router/router.ts#L671)라는 기초 인터페이스의 구현체(함수)와
+이 이를 확장한 구현체인[createBrowserRouter](https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L213)와 [createHashRouter](https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L227)가 그 예시이다.
 
-### 기초 클래스 : createRouter
+### 기초 인터페이스와 구현체(함수)) : createRouter
 
 [createRouter](https://github.com/remix-run/react-router/blob/main/packages/router/router.ts#L671) 함수는 [RouterInit](https://github.com/remix-run/react-router/blob/main/packages/router/router.ts#L342)을 props로 받아서 initialize() 함수를 실행하여 [Router](https://github.com/remix-run/react-router/blob/main/packages/router/router.ts#L56) 객체를 반환한다.
 
@@ -203,7 +142,7 @@ interface Router {
 }
 ```
 
-### 파생 클래스 : createBrowserRouter , createHashRouter
+### 파생된 인터페이스와 구현체(함수) : createBrowserRouter , createHashRouter
 
 [createBrowserRouter](https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L213)는 [createHashHistory](https://github.com/remix-run/react-router/blob/main/packages/router/history.ts#L414)와 마찬가지로 [RouteObject](https://github.com/remix-run/react-router/blob/main/packages/react-router/lib/context.ts#L54)와 [DOMRouterOpts](https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L206)를 props로 받아 [Router](https://github.com/remix-run/react-router/blob/main/packages/router/router.ts#L56)를 반환한다.
 
@@ -304,7 +243,7 @@ interface DOMRouterOpts {
 
 [RouterInit](https://github.com/remix-run/react-router/blob/main/packages/router/router.ts#L342)의 몇몇 프로퍼티(detectErrorBoundary)들은 정의되어있지 않은데, 이는 BrowserRouter와 HistoryRouter에서 사용되지 않는 옵셔널 프로퍼티이다.( 정확히는 [createMemoryRouter](https://github.com/remix-run/react-router/blob/main/packages/react-router/index.ts#L233)에서 사용한다.)
 
-즉 라이브러리에서 [createRouter](https://github.com/remix-run/react-router/blob/main/packages/router/router.ts#L671)를 기초클래스로 하는 파생 클래스인 [createBrowserRouter](https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L213)와 [createHashRouter](https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L227)를 정의하고, Router객체의 생성을 추상화하였다.
+즉 라이브러리에서 [createRouter](https://github.com/remix-run/react-router/blob/main/packages/router/router.ts#L671) 구현체를 확장하는 구현체인 [createBrowserRouter](https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L213)와 [createHashRouter](https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L227)를 정의하고, Router객체의 생성을 추상화하였다.
 
 ## History
 
@@ -342,4 +281,4 @@ export interface History {
 }
 ```
 
-마찬가지로 기초 클래스인 [History](https://github.com/remix-run/react-router/blob/main/packages/router/history.ts#L113) 인터페이스를 정의하고 이를 확장하였다. 정확하겐 확장보다는 고유한 시그니처를 갖게하였다.
+마찬가지로 기초 인터페이스인 [History](https://github.com/remix-run/react-router/blob/main/packages/router/history.ts#L113) 인터페이스를 정의하고 이를 확장하였다. 정확하겐 확장보다는 고유한 시그니처를 갖게하였다.
