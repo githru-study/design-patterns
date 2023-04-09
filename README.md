@@ -66,6 +66,7 @@
 ## 목차
 
 ### behavioral
+  - [command](./behavioral/command/command.md)
 
 ### creational
   - [factory-method](./creational/factory-method/factory-method.md)
