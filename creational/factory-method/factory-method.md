@@ -14,6 +14,10 @@
 
 캡슐화 함으로서 새로운 객체 유형이 추가되더라도 확장이 쉬워지며, 객체 생성 코드가 분리되었기 떄문에 객체 생성 로직이 변경되면 객체 생성 코드만 수정하여 유연하게 관리할 수 있으며, 객체를 생성하는 중복 코드도 줄일 수 있다.
 
+### UML
+
+<img src="https://refactoring.guru/images/patterns/diagrams/factory-method/structure-2x.png?id=9ea3aa8a47f8be22e12e523c15b448fd">
+
 ## 헷갈렸던 점
 
 ```tsx
