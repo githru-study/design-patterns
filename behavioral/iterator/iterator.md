@@ -44,7 +44,7 @@
 
 ## 구조
 
-![제목 없는 다이어그램.drawio (1).png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bd2f6160-7152-40a2-94dc-0240002845c2/%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8_%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%82%E1%85%B3%E1%86%AB_%E1%84%83%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%A5%E1%84%80%E1%85%B3%E1%84%85%E1%85%A2%E1%86%B7.drawio_(1).png)
+![image](https://user-images.githubusercontent.com/40057032/230771101-531e33c6-48b7-42d8-8f92-352a099d545c.png)
 
 - 반복자(Iterator): 컬렉션 순회에 필요한 작업 선언
 - 구체적인 반복자(Concrete Iterator): 특정 컬렉션 순회를 위한 알고리즘 구현 및 진행 상황 저장
