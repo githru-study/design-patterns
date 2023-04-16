@@ -112,6 +112,7 @@ class MacCheckbox implements Checkbox {
 class Application {
   private factory: GUIFactory;
   private button: Button;
+  private checkBox: Checkbox;
 
   constructor(factory: GUIFactory) {
     this.factory = factory;
@@ -119,6 +120,7 @@ class Application {
 
   createUI(): void {
     this.button = this.factory.createButton();
+    this.checkbox = this.factory.createCheckbox();
   }
 
   paint(): void {
