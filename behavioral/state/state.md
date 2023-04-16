@@ -29,7 +29,6 @@
 ### ASIS-TOBE 예제코드
 
 ```typescript
-// Context
 class Button {
   private currentState: 'on' | 'off' = 'off'
 
@@ -111,7 +110,7 @@ class OffState implements State {
 - 복잡한 ifelse 조건을 상태별 서브클래스로 이동 => 가장 큰 장점! (자연스럽게 SRP)
   - ASIS : 조건문 경우의 수가 최대 상태개수 x 행동개수 만큼 발생 가능  
       (최종 처리까지 도달하기까지가 매우 복잡해짐)
-  - TOBE : 상태개수 만큼의 ConcreteState클래스 선언 + 각 ConcreteState 내부에 행둥개수 만큼의 메서드  
+  - TOBE : 상태개수 만큼의 ConcreteState클래스 선언 + 각 ConcreteState 내부에 행동개수 만큼의 메서드  
       (최종 처리까지의 도달이 단순해짐)
 - 각 개별 상태클래스만 테스트할 수 있음
 - 새로운 상태를 추가하는게 매우 편리함
@@ -138,7 +137,7 @@ interface PostState {
   update()
 }
 
-// 차단된 상태 (ConcreteState)
+// 일반 상태 (ConcreteState)
 class ReadableState implements PostState {
   constructor(private readonly post: Post) {}
 
@@ -231,6 +230,11 @@ class Player {
 
   public setState(state:PlayerState) { this.state = state }
   public getState() { return this.state }
+  
+  public standUp() { this.state.standUp() }
+  public sitDown() { this.state.sitDown() }
+  public walk() { this.state.walk() }
+  public run() { this.state.run() }
 }
 
 abstract class PlayerState {
