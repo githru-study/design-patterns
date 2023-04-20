@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  runs:
+  build:
     uses: actions/checkout@v2
     run: node .github/toc-maker.js
   - name: Commit and push if changed
