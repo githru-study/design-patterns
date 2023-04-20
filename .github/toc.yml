@@ -1,0 +1,8 @@
+name: Make TOC
+on:
+  push:
+    branches:
+      - main
+runs:
+  using: 'node16'
+  main: '.github/toc-maker.js'
