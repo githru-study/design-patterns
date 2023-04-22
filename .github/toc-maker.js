@@ -69,7 +69,7 @@ const replaceWriting = (fileContents, toReplaced) => {
         )
 
     // TODO: readme 내에서 제목 가져오기
-    const toc = types.map((type, idx) => `## ${type}\n\n- ${paths[idx].join('\n- ')}`).join('\n\n')
+    const toc = types.map((type, idx) => `### ${type}\n\n- ${paths[idx].join('\n- ')}`).join('\n\n')
 
     const readme = (await readFile(path.join(process.cwd(), 'README_TEMPLATE.md'))).toString()
     await writeFile(path.join(process.cwd(), 'README.md'), replaceWriting(readme, toc))
