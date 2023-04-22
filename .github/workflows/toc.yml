@@ -24,6 +24,6 @@ jobs:
           git diff
           git config --global user.email "bot@github.actions"
           git config --global user.name "toc-maker"
-          git add -A
+          git add -u
           git commit -m "Update readme TOC" || exit 0
           git push

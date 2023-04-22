@@ -63,9 +63,9 @@ const replaceWriting = (fileContents, toReplaced) => {
 
 (async () => {
     const paths = (await Promise.all(types.map(type => getAllFilePath(type))))
-        .map(pathsInType => pathsInType
+        .map((pathsInType, idx) => pathsInType
             .filter(x => x !== '/.gitkeep' && !x.includes('.png'))
-            .map(x => `[${x.slice(x.lastIndexOf('/') + 1, x.indexOf('.'))}](${x})`)
+            .map(x => `[${x.slice(x.lastIndexOf('/') + 1, x.indexOf('.'))}](./${types[idx]}${x})`)
         )
 
     // TODO: readme 내에서 제목 가져오기
