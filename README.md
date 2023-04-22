@@ -15,7 +15,7 @@
 ## 진행방식
 
 - 개요 정리 + 사용사례(발췌 or 직접작성)
-  - 개요 정리 
+  - 개요 정리
     - 해결하고자 하는 문제 + 문제해결 아이디어 + 코드 (tobe only)
 
   - 사용사례 (asis → tobe)
@@ -65,12 +65,18 @@
 ---
 ## 목차
 
-### behavioral
-  - [command](./behavioral/command/command.md)
-  - [iterator](./behavioral/iterator/iterator.md)
-  - [state](./behavioral/state/state.md)
+## behavioral
 
-### creational
-  - [factory-method](./creational/factory-method/factory-method.md)
+- [command](/command/command.md)
+- [iterator](/iterator/iterator.md)
+- [mediator](/mediator/mediator.md)
+- [state](/state/state.md)
 
-### structural
+## creational
+
+- [abstract-factory](/abstract-factory/abstract-factory.md)
+- [factory-method](/factory-method/factory-method.md)
+
+## structural
+
+- [composite](/composite/composite.md)
