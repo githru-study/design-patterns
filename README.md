@@ -67,16 +67,16 @@
 
 ## behavioral
 
-- [command](/command/command.md)
-- [iterator](/iterator/iterator.md)
-- [mediator](/mediator/mediator.md)
-- [state](/state/state.md)
+- [command](./behavioral/command/command.md)
+- [iterator](./behavioral/iterator/iterator.md)
+- [mediator](./behavioral/mediator/mediator.md)
+- [state](./behavioral/state/state.md)
 
 ## creational
 
-- [abstract-factory](/abstract-factory/abstract-factory.md)
-- [factory-method](/factory-method/factory-method.md)
+- [abstract-factory](./creational/abstract-factory/abstract-factory.md)
+- [factory-method](./creational/factory-method/factory-method.md)
 
 ## structural
 
-- [composite](/composite/composite.md)
+- [composite](./structural/composite/composite.md)
