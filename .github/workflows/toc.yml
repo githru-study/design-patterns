@@ -1,17 +1,25 @@
-name: Make TOC
+name: table of contents maker
 on:
   push:
     branches:
       - main
 jobs:
-  build:
-    uses: actions/checkout@v2
-    run: node .github/toc-maker.js
-  - name: Commit and push if changed
-    run: |-
-      git diff
-      git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      git config --global user.name "github-actions-bot"
-      git add -A
-      git commit -m "Updated blogpost" || exit 0
-      git push
+  make:
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: install node
+        uses: actions/setup-node@v3
+
+      - name: make toc
+        run: node .github/toc-maker.js
+
+      - name: Commit and push if changed
+        run: |-
+          git diff
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions-bot"
+          git add -A
+          git commit -m "Updated blogpost" || exit 0
+          git push
