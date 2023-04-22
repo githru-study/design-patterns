@@ -65,18 +65,18 @@
 ---
 ## 목차
 
-## behavioral
+### behavioral
 
 - [command](./behavioral/command/command.md)
 - [iterator](./behavioral/iterator/iterator.md)
 - [mediator](./behavioral/mediator/mediator.md)
 - [state](./behavioral/state/state.md)
 
-## creational
+### creational
 
 - [abstract-factory](./creational/abstract-factory/abstract-factory.md)
 - [factory-method](./creational/factory-method/factory-method.md)
 
-## structural
+### structural
 
 - [composite](./structural/composite/composite.md)
