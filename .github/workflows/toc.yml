@@ -1,0 +1,29 @@
+name: table of contents maker
+on:
+  push:
+    branches:
+      - main
+jobs:
+  make:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ github.token }}
+
+      - name: install node
+        uses: actions/setup-node@v3
+
+      - name: make toc
+        run: node .github/toc-maker.js
+
+      - name: Commit and push if changed
+        run: |-
+          git diff
+          git config --global user.email "bot@github.actions"
+          git config --global user.name "toc-maker"
+          git add -u
+          git commit -m "Update readme TOC" || exit 0
+          git push
