@@ -1,4 +1,4 @@
-abstract class Component {
+export abstract class Component {
     protected parent!: Component | null;
 
     public setParent(parent: Component | null) {
@@ -9,12 +9,17 @@ abstract class Component {
         return this.parent;
     }
 
+    public abstract getChildren(): Set<Component> | null;
     public abstract add(component: Component): void;
     public abstract remove(component: Component): void;
 }
 
-class Page extends Component {
+export class Page extends Component {
     private children: Set<Component> = new Set<Component>();
+
+    public getChildren(): Set<Component> {
+        return this.children;
+    }
 
     public override add(component: Component) {
         this.children.add(component);
@@ -25,8 +30,12 @@ class Page extends Component {
     }
 }
 
-class CompoundShape extends Component {
+export class CompoundShape extends Component {
     private children: Set<Component> = new Set<Component>();
+
+    public getChildren(): Set<Component> {
+        return this.children;
+    }
 
     public override add(component: Component) {
         if (component instanceof Page) {
@@ -40,14 +49,18 @@ class CompoundShape extends Component {
     }
 }
 
-interface Point {
+export interface Point {
     x: number;
     y: number;
 }
 
-abstract class Shape extends Component {
+export abstract class Shape extends Component {
     protected constructor(protected position: Point) {
         super();
+    }
+
+    public getChildren(): null {
+        return null;
     }
 
     public override add(component: Component) {
@@ -59,13 +72,13 @@ abstract class Shape extends Component {
     }
 }
 
-class Circle extends Shape {
+export class Circle extends Shape {
     constructor(center: Point, private radius: number) {
         super(center);
     }
 }
 
-class Rectangle extends Shape {
+export class Rectangle extends Shape {
     constructor(lt: Point, private width: number, private height: number) {
         super(lt);
     }

@@ -1,0 +1,28 @@
+{
+  "name": "design-patterns",
+  "version": "1.0.0",
+  "description": "디자인 패턴 스터디 (주교재 : https://refactoring.guru/ko/design-patterns)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/githru-study/design-patterns.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/githru-study/design-patterns/issues"
+  },
+  "homepage": "https://github.com/githru-study/design-patterns#readme",
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-typescript": "^7.21.4",
+    "@types/jest": "^29.5.1",
+    "babel-jest": "^29.5.0",
+    "jest": "^29.5.0"
+  }
+}
