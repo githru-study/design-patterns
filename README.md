@@ -81,3 +81,4 @@
 ### structural
 
 - [composite](./structural/composite/composite.md)
+- [decorator](./structural/decorator/decorator.md)
