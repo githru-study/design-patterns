@@ -382,11 +382,11 @@ public class ServerHttpRequestDecorator implements ServerHttpRequest {
 
 	@Override
 	public HttpMethod getMethod() { return getDelegate().getMethod(); }
-	
-  @Override
+
+	@Override
 	public URI getURI() { return getDelegate().getURI(); }
 
-  // ...
+	// ...
 }
 ```
 - https://github.com/spring-projects/spring-framework/blob/main/spring-web/src/main/java/org/springframework/http/server/reactive/ServerHttpRequestDecorator.java
