@@ -66,7 +66,10 @@ components.map(component => component.accept(visitor))
 2. 요소 인터페이스에 비지터 객체를 인수로 받는 추상 수락 메서드 추가
 3. 모든 구상 요소 클래스에서 수락 메서드 구현
 4. 모든 비지터 메서드 구현
-5. 클라이언트에서 비지터 객체를 만들고 수락 메서드를 통해 요소에 비지터를 전달 
+5. 클라이언트에서 비지터 객체를 만들고 수락 메서드를 통해 요소에 비지터를 전달
+
+
+[전체 구현 코드](https://github.com/githru-study/design-patterns/pull/2)
 
 ### as-is
 
@@ -301,3 +304,4 @@ identifier
 - [비지터 - Refactoring Guru](https://refactoring.guru/ko/design-patterns/visitor)
 - [타입스크립트 디자인 패턴, 빌릭 베인 저](http://www.yes24.com/Product/Goods/38881387)
 - [Head First Design Patterns, 에릭 프리먼 등저](http://www.yes24.com/Product/Goods/1778966)
+- [Step-by-step guide for writing a custom babel transformation](https://lihautan.com/step-by-step-guide-for-writing-a-babel-transformation/)
