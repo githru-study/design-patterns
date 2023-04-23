@@ -183,8 +183,6 @@ state를 업데이트하고, 데이터 전달을 강제할 뿐이다.
 
 Flux 패턴은 Store와 Action을 사용하여 컴포넌트간 상호작용을 캡슐화하는 역할은 하지만, Mediator 패턴보다 훨씬 구체적이고 상세하다.
 
-//TODO 예시코드, 장단점, FLUX, event driven architecture, OS
-
 ## 예시
 
 mediator pattern을 사용하는 다음과 같은 예시들이 있다.
@@ -206,6 +204,12 @@ https://www.oreilly.com/library/view/software-architecture-patterns/978149197143
 노드 각각이 이벤트 핸들러와 직접 연결되지 않고, 상위요소에서 이벤트 핸들러와 각 노드 사이의 연결을 중재한다는 점에서 DOM의 이벤트 위임도 중재자 패턴이라고 할 수 있다.
 
 예시로 리액트에선 다음과 같은 이벤트 아키텍쳐[https://ko.legacy.reactjs.org/blog/2020/10/20/react-v17.html#changes-to-event-delegation]를 사용하고 있다.
+
+### MVVM
+
+View Model이 중재자의 역할을 하고있다.
+
+https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel
 
 ### Micro Service(Kafka)
 
