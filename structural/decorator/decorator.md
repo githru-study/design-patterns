@@ -27,14 +27,6 @@
   - 호스트코드 쪽에서는 데코레이터를 인식할 수 없음
 
 
-### 구현방법
-
-- Context 클래스 식별
-- State 인터페이스 정의 (Context 에 선언된 상태별 분기 동작 메서드 미러링)
-- 모든 실제 상태에 대한 ConcreteState 정의 + 상태별 분기 동작 메서드 구현
-- Context 클래스의 분기 동작 메서드를 ConcreteState로 교체
-
-
 ### ASIS-TOBE 예제코드
 
 ```typescript
