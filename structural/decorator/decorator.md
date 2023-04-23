@@ -461,7 +461,7 @@ export function Inject<T = any>(token?: T) {
   - https://github.com/nestjs/nest/blob/master/packages/common/test/decorators/inject.decorator.spec.ts
 
 
-### RedusJS/react-redux
+### ReduxJS/react-redux
 
 ```javascript
 import React from 'react'
