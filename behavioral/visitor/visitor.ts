@@ -12,6 +12,8 @@ export abstract class Component {
     public abstract getChildren(): Set<Component> | null;
     public abstract add(component: Component): void;
     public abstract remove(component: Component): void;
+
+    public abstract exportAsXml(): string;
 }
 
 export class Page extends Component {
@@ -27,6 +29,10 @@ export class Page extends Component {
 
     public override remove(component: Component) {
         this.children.delete(component);
+    }
+
+    public exportAsXml(): string {
+        return "";
     }
 }
 
@@ -46,6 +52,10 @@ export class CompoundShape extends Component {
 
     public override remove(component: Component) {
         this.children.delete(component);
+    }
+
+    public exportAsXml(): string {
+        return "";
     }
 }
 
@@ -76,10 +86,18 @@ export class Circle extends Shape {
     constructor(center: Point, private radius: number) {
         super(center);
     }
+
+    public exportAsXml(): string {
+        return "";
+    }
 }
 
 export class Rectangle extends Shape {
     constructor(lt: Point, private width: number, private height: number) {
         super(lt);
+    }
+
+    public exportAsXml(): string {
+        return "";
     }
 }
