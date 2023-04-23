@@ -1,13 +1,13 @@
 import builder from "xmlbuilder";
 
-interface ExportVisitor {
-    exportPage(component: Page): void;
-    exportCompoundShape(component: CompoundShape): void;
-    exportRectangle(component: Rectangle): void;
-    exportCircle(component: Circle): void;
+interface ExportVisitor<T = any> {
+    exportPage(component: Page): T;
+    exportCompoundShape(component: CompoundShape): T;
+    exportRectangle(component: Rectangle): T;
+    exportCircle(component: Circle): T;
 }
 
-export class XmlExportVisitor implements ExportVisitor {
+export class XmlExportVisitor implements ExportVisitor<string> {
     public exportPage(page: Page) {
         const result = builder.create('Page')
         let child = ''
@@ -45,6 +45,36 @@ export class XmlExportVisitor implements ExportVisitor {
     }
 }
 
+export class JsonExportVisitor implements ExportVisitor<object> {
+
+    exportCompoundShape(component: CompoundShape) {
+        const children: object[] = [];
+        component.getChildren().forEach(x => children.push(x.accept(this)))
+        return { children }
+    }
+
+    exportPage(component: Page) {
+        const children: object[] = [];
+        component.getChildren().forEach(x => children.push(x.accept(this)))
+        return { children }
+    }
+
+    exportCircle(component: Circle) {
+        return {
+            center: component.getPosition(),
+            radius: component.radius
+        }
+    }
+
+    exportRectangle(component: Rectangle) {
+        return {
+            position: component.getPosition(),
+            width: component.width,
+            height: component.height
+        }
+    }
+}
+
 export abstract class Component {
     protected parent!: Component | null;
 
@@ -59,7 +89,7 @@ export abstract class Component {
     public abstract getChildren(): Set<Component> | null;
     public abstract add(component: Component): void;
     public abstract remove(component: Component): void;
-    public abstract accept(visitor: ExportVisitor): void;
+    public abstract accept(visitor: ExportVisitor<any>): any;
 }
 
 export class Page extends Component {
