@@ -49,12 +49,111 @@ UML에서 각 객체들은 다음과 같은 속성을 가지고 있다.
 1. 컴포넌트들은 다른 컴포넌트들에 대해서 몰라야 한다.
    컴포넌트 내에서 또는 컴포넌트 간 중요한 일이 발생하면 컴포넌트들은 이를 중재자에게만 알려야한다.
 
+## 예시 코드
+
+```ts
+interface Mediator {
+  notify(sender: object, event: string): void;
+}
+
+class ConcreteMediator implements Mediator {
+  private component1: Component1;
+  private component2: Component2;
+
+  constructor(c1: Component1, c2: Component2) {
+    this.component1 = c1;
+    this.component1.setMediator(this);
+    this.component2 = c2;
+    this.component2.setMediator(this);
+  }
+
+  public notify(sender: object, event: string): void {
+    if (event === "A") {
+      console.log("Mediator reacts on A and triggers following operations:");
+      this.component2.doC();
+    }
+
+    if (event === "D") {
+      console.log("Mediator reacts on D and triggers following operations:");
+      this.component1.doB();
+      this.component2.doC();
+    }
+  }
+}
+
+class BaseComponent {
+  protected mediator: Mediator;
+
+  constructor(mediator?: Mediator) {
+    this.mediator = mediator!;
+  }
+
+  public setMediator(mediator: Mediator): void {
+    this.mediator = mediator;
+  }
+}
+
+class Component1 extends BaseComponent {
+  public doA(): void {
+    console.log("Component 1 does A.");
+    this.mediator.notify(this, "A");
+  }
+
+  public doB(): void {
+    console.log("Component 1 does B.");
+    this.mediator.notify(this, "B");
+  }
+}
+
+class Component2 extends BaseComponent {
+  public doC(): void {
+    console.log("Component 2 does C.");
+    this.mediator.notify(this, "C");
+  }
+
+  public doD(): void {
+    console.log("Component 2 does D.");
+    this.mediator.notify(this, "D");
+  }
+}
+
+const c1 = new Component1();
+const c2 = new Component2();
+const mediator = new ConcreteMediator(c1, c2);
+
+console.log("Client triggers operation A.");
+c1.doA();
+
+console.log("");
+console.log("Client triggers operation D.");
+c2.doD();
+```
+
+실행 결과
+
+```
+Client triggers operation A.
+Component 1 does A.
+Mediator reacts on A and triggers following operations:
+Component 2 does C.
+
+Client triggers operation D.
+Component 2 does D.
+Mediator reacts on D and triggers following operations:
+Component 1 does B.
+Component 2 does C.
+```
+
 ## 헷갈렸던 점
 
 Flux 패턴은 Mediator 패턴이 아닐지 헷갈렸다.
 
 React에서 상태관리를 위해 사용하는 Flux 패턴의 대표적인 구현체인 Redux는 전역 State를 Store에 두고 각 컴포넌트에선 Action을 호출해서 State를 변경한다.
 그리고 이에 대한 변경사항 처리는 Reducer에서 수행한다.
+
+UML은 다음과 같다.
+
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMX0QN%2FbtrvJZqlrdP%2FZY4L7U2NaKWsdLkhFPDxFk%2Fimg.png"/>
 
 컴포넌트간 직접 상호작용 하지 않고 컴포넌트는 단순히 Action을 호출하고 Store와 리듀서에서 변경을 만들고 렌더링을 트리거 하는 방식이 Mediator + Observer 패턴이 아닐까 생각했다.
 
@@ -85,3 +184,31 @@ state를 업데이트하고, 데이터 전달을 강제할 뿐이다.
 Flux 패턴은 Store와 Action을 사용하여 컴포넌트간 상호작용을 캡슐화하는 역할은 하지만, Mediator 패턴보다 훨씬 구체적이고 상세하다.
 
 //TODO 예시코드, 장단점, FLUX, event driven architecture, OS
+
+## 예시
+
+mediator pattern을 사용하는 다음과 같은 예시들이 있다.
+
+### Event Driven Architecture
+
+이벤트 기반 아키텍쳐(Event Driven Architecture)를 설계할 때도 많이 쓰인다.
+
+이벤트 중재자를 두어, 이벤트를 수신하여 특정 비즈니스 로직을 실행한다.
+
+이벤트 중재자에서 객체간 작업 순서에 대해 조율할 수 있기 때문에 실행할 비즈니스 로직을 여러 단계로 나누어야 할 때 유용하다.
+
+https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch02.html
+
+### DOM Event
+
+[Event mdn](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks/Events)DOM에는 이벤트 버블링이라는 개념과 이벤트 버블링을 이용한 이벤트 위임이라는 개념이 있다.
+
+노드 각각이 이벤트 핸들러와 직접 연결되지 않고, 상위요소에서 이벤트 핸들러와 각 노드 사이의 연결을 중재한다는 점에서 DOM의 이벤트 위임도 중재자 패턴이라고 할 수 있다.
+
+예시로 리액트에선 다음과 같은 이벤트 아키텍쳐[https://ko.legacy.reactjs.org/blog/2020/10/20/react-v17.html#changes-to-event-delegation]를 사용하고 있다.
+
+### Micro Service(Kafka)
+
+대규모 분산시스템에서도 시스템간 연결이나 상호작용을 추적하고, 결합을 줄이기 위해 사용한다.
+
+https://ducmanhphan.github.io/2020-05-15-Understanding-about-Kafka/
