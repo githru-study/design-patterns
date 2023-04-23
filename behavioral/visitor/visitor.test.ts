@@ -1,4 +1,4 @@
-import {Circle, CompoundShape, Page, Rectangle} from "./visitor";
+import {Circle, CompoundShape, Page, Rectangle, XmlExportVisitor} from "./visitor";
 
 test('노드가 올바르게 추가된다', () => {
     const page = new Page();
@@ -14,11 +14,13 @@ test('노드가 올바르게 추가된다', () => {
 })
 
 describe('노드 변환하기', function () {
+    const visitor = new XmlExportVisitor();
+
     test.each([
         ['rectangle', new Rectangle({x: 40, y: 50}, 10, 50), '<Rectangle left="40" top="50" right="50" bottom="100" width="10" height="50" area="500"/>'],
         ['circle', new Circle({x: 80, y: 20}, 20), '<Circle centerX="80" centerY="20" radius="20" area="1256"/>'],
     ])('%s 노드를 올바르게 변환한다', (_, received, expected) => {
-        const result = received.exportAsXml()
+        const result = received.accept(visitor)
 
         expect(result).toBe(expected)
     });
@@ -28,7 +30,7 @@ describe('노드 변환하기', function () {
         compoundShape.add(new Rectangle({x: 40, y: 50}, 10, 50));
         compoundShape.add(new Circle({x: 80, y: 20}, 20));
 
-        const result = compoundShape.exportAsXml()
+        const result = compoundShape.accept(visitor)
 
         expect(result).toBe(`<CompoundShape><Rectangle left="40" top="50" right="50" bottom="100" width="10" height="50" area="500"/><Circle centerX="80" centerY="20" radius="20" area="1256"/></CompoundShape>`)
     })
@@ -41,9 +43,10 @@ describe('노드 변환하기', function () {
         page.add(compoundShape);
         page.add(new Rectangle({x: 10, y: 10}, 20, 40));
 
-        const result = page.exportAsXml();
+        const result = page.accept(visitor);
 
         const expected = `<Page><CompoundShape><Rectangle left="40" top="50" right="50" bottom="100" width="10" height="50" area="500"/><Circle centerX="80" centerY="20" radius="20" area="1256"/></CompoundShape><Rectangle left="10" top="10" right="30" bottom="50" width="20" height="40" area="800"/></Page>`
         expect(result).toBe(expected)
+        console.log(result)
     })
 });
