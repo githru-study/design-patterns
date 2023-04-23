@@ -64,7 +64,7 @@ const replaceWriting = (fileContents, toReplaced) => {
 (async () => {
     const paths = (await Promise.all(types.map(type => getAllFilePath(type))))
         .map((pathsInType, idx) => pathsInType
-            .filter(x => x !== '/.gitkeep' && !x.includes('.png'))
+            .filter(x => x.includes('.md'))
             .map(x => `[${x.slice(x.lastIndexOf('/') + 1, x.indexOf('.'))}](./${types[idx]}${x})`)
         )
 
