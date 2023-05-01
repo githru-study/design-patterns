@@ -50,38 +50,6 @@
 
 다음과 같은 사용 예시가 있다.
 
-### 자바스크립트의 배열 파이프라인 연산자
-
-짝수의 하을 구하는 코드를 작성해보면 다음과 같이 작성할 수 있다.
-
-자바스크립트의 배열 내장 메서드(map,reduce,filter)등은 연산 결과를 다음 파이프로 전달한다.
-
-```js
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-let evenNumbers = [];
-let sum = 0;
-
-for (let i = 0; i < numbers.length; i++) {
-  if (numbers[i] % 2 === 0) {
-    evenNumbers.push(numbers[i]);
-  }
-}
-
-for (let i = 0; i < evenNumbers.length; i++) {
-  sum += evenNumbers[i];
-}
-```
-
-이는 책임 연쇄 패턴이 적용된 파이프라인 함수를 사용해서 다음과 같이 수정할 수 있다.
-
-```js
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-const sum = numbers
-  .filter((num) => num % 2 === 0)
-  .reduce((acc, curr) => acc + curr, 0);
-```
-
 ### 미들웨어
 
 ### nest의 pipe and filter
@@ -99,11 +67,3 @@ axios에서도 요청과 응답을 가로채기 위해 interceptor를 사용할 
 요청과 응답을 가로채 처리하고 다음 interceptor에게 전달하거나 HTTP 요청을 보낸다.
 
 https://axios-http.com/kr/docs/interceptors
-
-### d3
-
-d3는 데이터 시각화를 하는데에 메서드 체이닝을 활용한다.
-
-한 메서드에서 이전 메서드의 결과를 데이터를 변형하거나 DOM을 조작한뒤 다음 메서드로 전달한다.
-
-https://github.com/githru
