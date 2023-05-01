@@ -67,6 +67,7 @@
 
 ### behavioral
 
+- [chain-of-responsibility](./behavioral/chain-of-responsibility/chain-of-responsibility.md)
 - [command](./behavioral/command/command.md)
 - [iterator](./behavioral/iterator/iterator.md)
 - [mediator](./behavioral/mediator/mediator.md)
