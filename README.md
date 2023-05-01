@@ -72,6 +72,7 @@
 - [iterator](./behavioral/iterator/iterator.md)
 - [mediator](./behavioral/mediator/mediator.md)
 - [state](./behavioral/state/state.md)
+- [strategy](./behavioral/strategy/strategy.md)
 - [visitor](./behavioral/visitor/visitor.md)
 
 ### creational
