@@ -71,6 +71,7 @@
 - [command](./behavioral/command/command.md)
 - [iterator](./behavioral/iterator/iterator.md)
 - [mediator](./behavioral/mediator/mediator.md)
+- [observer-yj](./behavioral/observer/observer-yj.md)
 - [observer](./behavioral/observer/observer.md)
 - [state](./behavioral/state/state.md)
 - [strategy](./behavioral/strategy/strategy.md)
