@@ -101,9 +101,9 @@ interface Device {
   enable()
   disable()
   getVolume()
-  setVolume(percent)
+  setVolume(percent:number)
   getChannel()
-  setChannel(channel)
+  setChannel(channel:number)
 }
 
 
@@ -140,6 +140,7 @@ remote2.mute()
 ### 단점
 - 코드 복잡도가 올라감
 - Implemetation 계층을 나누는 작업이 어려움
+- 클라이언트 코드에서 Abstraction로의 
 
 
 ---
