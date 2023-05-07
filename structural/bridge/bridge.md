@@ -4,7 +4,7 @@
 
 - 밀접하게 관련된 클래스들의 집합을 개별 계층구조(ex. 추상화계층/구현계층)로 나눔
   - 계층을 구분하여 각각 독립적으로 개발할 수 있도록 디자인
-  - ex1) 동작들만 모아놓은 계층 / 상태만 뫃아놓은 계층
+  - ex1) 동작들만 모아놓은 계층 / 상태만 모아놓은 계층
   - ex2) 프론트엔드 / 백엔드
   - ex3) GUI / API
 
@@ -42,9 +42,11 @@
 
 - Abstraction 은 이 계층에서의 공통적인 인터페이스를 선언
   - 보통 여기에서 클라이언트에 직접 상호작용하므로, 상위수준의 제어로직 메서드가 정의됨
+  - Abstraction 에서는 주로 원시 작업들을 기반으로 더 상위 수준의 작업들을 정의
 
 - Implemetation 은 이 계층에서의 공통적인 인터페이스를 선언
   - Abstraction은 여기에서 정의된 메서드를 통해서만 클라이언트에 기능 제공
+  - Implemetation 에서는 주로 원시(primitive) 작업들을 정의
 
 - Concrete-Implemetation 은 플랫폼별 맞춤형 코드를 제공
 
@@ -63,10 +65,8 @@ class RemoteControl {
   constructor(protected readonly device: Device) {}
 
   togglePower() {
-    if (this.device.isEnabled()) then
-      this.device.disable()
-    else
-      this.device.enable()
+    if (this.device.isEnabled()) this.device.disable()
+    else this.device.enable()
   }
 
   volumeDown() {
@@ -131,8 +131,6 @@ remote2.mute()
 ### 장점
 - 계층을 분리하여 코드를 관리할 수 있음
   - 추상적인 코드(상위수준의 제어 논리) / 구체적인 코드(제어논리의 세부 구현)
-  - Abstraction 에서는 주로 원시 작업들을 기반으로 더 상위 수준의 작업들을 정의
-  - Implemetation 에서는 주로 원시(primitive) 작업들을 정의
 
 - 다른 계층에 영향을 주지않으면서, 대상 계층을 변경할 수 있음
 
@@ -140,7 +138,7 @@ remote2.mute()
 ### 단점
 - 코드 복잡도가 올라감
 - Implemetation 계층을 나누는 작업이 어려움
-- 클라이언트 코드에서 Abstraction로의 
+- 클라이언트 코드에서 Abstraction로의 의존성이 높아짐
 
 
 ---
