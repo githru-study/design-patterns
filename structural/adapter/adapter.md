@@ -22,7 +22,7 @@
 - Service(Adaptee) : 인터페이스 호환이 필요한 클래스 (=외부 서비스)
 
 - Adapter : Client ↔ Service 사이를 연결해주는 클래스
-  - Client객체를 래핑(wrapping) 하고, 내부적으로 Client객체에서 이해할 수 있는 인터페이스로 변환
+  - Service객체를 래핑(wrapping) 하고, 내부적으로 Client객체에서 이해할 수 있는 인터페이스로 변환
 
 
 ### ASIS-TOBE 예제코드
@@ -123,7 +123,7 @@ public class HelloController {
 - https://docs.spring.io/spring-framework/docs/3.0.0.M4/spring-framework-reference/html/ch15s02.html
 
 
-### TypeORM
+### React + Redux
 
 ```typescript
 class TodoList extends React.Component {
