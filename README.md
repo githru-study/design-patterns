@@ -89,3 +89,4 @@
 - [bridge](./structural/bridge/bridge.md)
 - [composite](./structural/composite/composite.md)
 - [decorator](./structural/decorator/decorator.md)
+- [facade](./structural/facade/facade.md)
