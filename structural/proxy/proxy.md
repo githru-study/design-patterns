@@ -10,12 +10,12 @@
 ### 해결하고자 하는 문제
 
 - 로직의 전/후에 무언가를 실행해야하는 경우
-- 객체를 필요할 때만 생성해야하는 경우 (지연된 초기화 - Virtual Proxy)
-- 특정 클라이언트만 객체를 사용할수있도록 해야하는 경우 (접근제어 - Protection Proxy)
-- 원격 서비스의 로컬 실행 (Remote Proxy)
-- 각 요청들의 로깅 (Logging Proxy)
-- 요청 결과의 캐싱 (Caching Proxy)
-- 참조 클라이언트가 없는 경우에 객체 해제 (Smart Reference)
+  - 객체를 필요할 때만 생성해야하는 경우 (지연된 초기화 - Virtual Proxy)
+  - 특정 클라이언트만 객체를 사용할수있도록 해야하는 경우 (접근제어 - Protection Proxy)
+  - 원격 서비스의 로컬 실행 (Remote Proxy)
+  - 각 요청들의 로깅 (Logging Proxy)
+  - 요청 결과의 캐싱 (Caching Proxy)
+  - 참조 클라이언트가 없는 경우에 객체 해제 (Smart Reference)
 
 
 
@@ -90,12 +90,15 @@ function run() {
 ```typescript
 // 원격 서비스 인터페이스
 interface RemoteService {
-  getData(): void;
+  getData();
 }
 
 // 원격 서비스 구현
 class RemoteServiceImpl implements RemoteService {
-  getData(): void { /* ... */ }
+  getData() {
+    // ...
+    console.log("data");
+  }
 }
 
 // 보호 프록시
@@ -116,7 +119,7 @@ class ProtectionProxy implements RemoteService {
     return this.isAuthenticated;
   }
 
-  getData(): void {
+  getData() {
     if (!this.remoteService) {
       this.remoteService = new RemoteServiceImpl();
     }
@@ -132,7 +135,7 @@ function run() {
   const proxy: RemoteService = new ProtectionProxy();
   proxy.getData(); // 출력: not authenticated
   proxy.authenticate(); // 출력: authenticate ok
-  proxy.getData();
+  proxy.getData(); // 출력: data
 }
 ```
 
@@ -141,12 +144,12 @@ function run() {
 ```typescript
 // 원격 서비스 인터페이스
 interface OriginService {
-  getData(): void;
+  getData();
 }
 
 // 원격 서비스 구현
 class OriginServiceImpl implements OriginService {
-  getData(): void {
+  getData() {
     // ...
     console.log("Fetching data...");
   }
@@ -157,7 +160,7 @@ class SmartReferenceProxy implements OriginService {
   private originService: OriginService | null = null;
   private referenceCount: number = 0;
 
-  getData(): void {
+  getData() {
     if (!this.originService) {
       this.originService = new OriginServiceImpl();  // 지연 초기화
     }
