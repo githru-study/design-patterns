@@ -82,6 +82,7 @@
 - [abstract-factory](./creational/abstract-factory/abstract-factory.md)
 - [builder](./creational/builder/builder.md)
 - [factory-method](./creational/factory-method/factory-method.md)
+- [prototype](./creational/prototype/prototype.md)
 - [singleton](./creational/singleton/singleton.md)
 
 ### structural
