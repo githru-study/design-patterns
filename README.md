@@ -75,6 +75,7 @@
 - [observer](./behavioral/observer/observer.md)
 - [state](./behavioral/state/state.md)
 - [strategy](./behavioral/strategy/strategy.md)
+- [template-method](./behavioral/template-method/template-method.md)
 - [visitor](./behavioral/visitor/visitor.md)
 
 ### creational
