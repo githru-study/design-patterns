@@ -65,32 +65,37 @@
 ---
 ## 목차
 
-### behavioral
 
-- [chain-of-responsibility](./behavioral/chain-of-responsibility/chain-of-responsibility.md)
-- [command](./behavioral/command/command.md)
-- [iterator](./behavioral/iterator/iterator.md)
-- [mediator](./behavioral/mediator/mediator.md)
-- [observer-yj](./behavioral/observer/observer-yj.md)
-- [observer](./behavioral/observer/observer.md)
-- [state](./behavioral/state/state.md)
-- [strategy](./behavioral/strategy/strategy.md)
-- [template-method](./behavioral/template-method/template-method.md)
-- [visitor](./behavioral/visitor/visitor.md)
 
-### creational
+### 행동 패턴
+| Title | Author | Date |
+| ----------- | ----- | ---- |
+|[Command 패턴](./behavioral/command/command.md)|[안바울](https://github.com/anpaul0615)|2023. 4. 9.|
+|[반복자 패턴](./behavioral/iterator/iterator.md)|[조예진](https://github.com/ooooorobo)|2023. 4. 9.|
+|[State 패턴](./behavioral/state/state.md)|[안바울](https://github.com/anpaul0615)|2023. 4. 16.|
+|[비지터 패턴](./behavioral/visitor/visitor.md)|[조예진](https://github.com/ooooorobo)|2023. 4. 23.|
+|[Strategy 패턴](./behavioral/strategy/strategy.md)|[안바울](https://github.com/anpaul0615)|2023. 5. 1.|
+|[책임 연쇄 패턴](./behavioral/chain-of-responsibility/chain-of-responsibility.md)|[박성현](https://github.com/pshdev1030)|2023. 5. 3.|
+|[옵저버 패턴](./behavioral/observer/observer.md)|[박성현](https://github.com/pshdev1030)|2023. 5. 7.|
+|[Template-method pattern](./behavioral/template-method/template-method.md)|[박성현](https://github.com/pshdev1030)|2023. 5. 28.|
+|[중재자 패턴](./behavioral/mediator/mediator.md)|[조예진](https://github.com/ooooorobo)|2023. 6. 6.|
+|[옵저버 패턴](./behavioral/observer/observer-yj.md)|[조예진](https://github.com/ooooorobo)|2023. 6. 6.|,
 
-- [abstract-factory](./creational/abstract-factory/abstract-factory.md)
-- [builder](./creational/builder/builder.md)
-- [factory-method](./creational/factory-method/factory-method.md)
-- [prototype](./creational/prototype/prototype.md)
-- [singleton](./creational/singleton/singleton.md)
+### 생성 패턴
+| Title | Author | Date |
+| ----------- | ----- | ---- |
+|[빌더 패턴](./creational/builder/builder.md)|[조예진](https://github.com/ooooorobo)|2023. 5. 1.|
+|[싱글턴 패턴](./creational/singleton/singleton.md)|[조예진](https://github.com/ooooorobo)|2023. 5. 21.|
+|[프로토타입 패턴](./creational/prototype/prototype.md)|[조예진](https://github.com/ooooorobo)|2023. 5. 28.|
+|[추상 팩토리 패턴](./creational/abstract-factory/abstract-factory.md)|[조예진](https://github.com/ooooorobo)|2023. 6. 6.|
+|[팩토리 메서드 패턴](./creational/factory-method/factory-method.md)|[조예진](https://github.com/ooooorobo)|2023. 6. 6.|,
 
-### structural
-
-- [adapter](./structural/adapter/adapter.md)
-- [bridge](./structural/bridge/bridge.md)
-- [composite](./structural/composite/composite.md)
-- [decorator](./structural/decorator/decorator.md)
-- [facade](./structural/facade/facade.md)
-- [proxy](./structural/proxy/proxy.md)
+### 구조 패턴
+| Title | Author | Date |
+| ----------- | ----- | ---- |
+|[복합체 패턴](./structural/composite/composite.md)|[조예진](https://github.com/ooooorobo)|2023. 4. 16.|
+|[Decorator 패턴](./structural/decorator/decorator.md)|[안바울](https://github.com/anpaul0615)|2023. 4. 23.|
+|[Adapter 패턴](./structural/adapter/adapter.md)|[안바울](https://github.com/anpaul0615)|2023. 5. 21.|
+|[Proxy 패턴](./structural/proxy/proxy.md)|[안바울](https://github.com/anpaul0615)|2023. 5. 28.|
+|[Bridge 패턴](./structural/bridge/bridge.md)|[박성현](https://github.com/pshdev1030)|2023. 5. 28.|
+|[Facade 패턴](./structural/facade/facade.md)|[조예진](https://github.com/ooooorobo)|2023. 6. 6.|
