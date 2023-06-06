@@ -1,25 +1,8 @@
 const fs = require('fs')
 const path = require('path')
+const spawn = require('child_process').spawn;
 
 const types = ['behavioral', 'creational', 'structural']
-
-const authorToId = {
-    '조예진': 'ooooorobo',
-    'Paul An': 'anpaul0615',
-    'paulan': 'anpaul0615',
-    'pshdev1030': 'pshdev1030',
-}
-const authorToName = {
-    '조예진': '조예진',
-    'Paul An': '안바울',
-    'paulan': '안바울',
-    'pshdev1030': '박성현',
-}
-const typeToName = {
-    'behavioral': '행동 패턴',
-    'creational': '생성 패턴',
-    'structural': '구조 패턴',
-}
 
 const readFromDirectory = async (dirPath) => {
     return new Promise((resolve, reject) => {
@@ -75,45 +58,37 @@ const getAllFilePath = async (basePath) => {
     return filePaths
 }
 
-const replaceWriting = (fileContents, toReplaced) => {
-    return fileContents.replace(/(<!-- toc starts -->)(.|\n)*(<!-- toc ends -->)/, toReplaced)
+const spawnProcess = async (command, args) => {
+    return new Promise((resolve) => {
+        const child = spawn(command, args);
+        child.stdout.setEncoding('utf8');
+        child.stdout.on('data', function(data) {
+            resolve(data);
+        });
+    });
 }
 
-const parseFrontMatter = (contents) => {
-    const meta = {}
-    const lines = contents.match(/---([\s\S]*?)---/)?.[0].split('\n')
-    for (const line of lines) {
-        if (line.startsWith('---')) continue;
-        const colonPos = line.indexOf(':');
-        const key = line.slice(0, colonPos), value = line.slice(colonPos + 1).trim()
-        meta[key] = key === 'date' ? new Date(value) : value;
-    }
-    return meta
+const makeMeta = async (contents, pathName, type) => {
+    const title = contents.trim().split('\n')[0].replace('#', '').trim();
+    const [author, date] = (await spawnProcess('git', ['log', '-1', '--format=%an@%ad', path.join(process.cwd(), type, pathName)])).trim().split('@');
+    return `---
+title: ${title}
+author: ${author}
+date: ${date}
+type: ${type}
+---
+`
 }
-
 
 (async () => {
-    const metaList = [];
-
     for (const type of types) {
         const paths = (await getAllFilePath(type)).filter(x => x.includes('.md'));
         for (const pathName of paths) {
             const contents = (await readFile(`${type}${pathName}`)).toString()
-            metaList.push({...parseFrontMatter(contents), path: `./${type}${pathName}`});
+            if (contents.startsWith('---')) {
+                continue;
+            }
+            await writeFile(path.join(process.cwd(), type, pathName), await makeMeta(contents, pathName, type) + contents);
         }
     }
-
-    const header = '| Title | Author | Date |\n| ----------- | ----- | ---- |\n'
-    const toc = types.map(type =>
-        `\n\n### ${typeToName[type]}\n` +
-        header +
-        metaList
-            .filter(x => x.type === type)
-            .sort((a, b) => a.date - b.date)
-            .map(x => `|[${x.title}](${x.path})|[${authorToName[x.author]}](https://github.com/${authorToId[x.author]})|${x.date.toLocaleDateString('ko')}|`)
-            .join('\n')
-    );
-
-    const readme = (await readFile(path.join(process.cwd(), 'README_TEMPLATE.md'))).toString()
-    await writeFile(path.join(process.cwd(), 'README.md'), replaceWriting(readme, toc))
-})()
+})();

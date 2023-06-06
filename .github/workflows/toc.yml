@@ -11,19 +11,23 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         with:
+          fetch-depth: 0
           token: ${{ github.token }}
 
       - name: install node
         uses: actions/setup-node@v3
+
+      - name: update meta
+        run: node .github/add-meta.js
 
       - name: make toc
         run: node .github/toc-maker.js
 
       - name: Commit and push if changed
         run: |-
-          git diff
+          git diff README.md
           git config --global user.email "bot@github.actions"
           git config --global user.name "toc-maker"
-          git add -u
+          git add README.md
           git commit -m "Update readme TOC" || exit 0
           git push
